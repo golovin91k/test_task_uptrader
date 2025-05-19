@@ -1,9 +1,32 @@
-<ul>
-    {% for node in menu_tree %}
-    <li>
-        <a href="/">
-           {{ node }}
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+<div class="menu">
+    <h5 class="mb-3">
+      <a href="{% url 'tree_menu:home' %}" class="text-decoration-none">Меню {{menu_title}} </a>
+    </h5>
+  
+    <ul class="list-unstyled">
+      {% for parent in parents %}
+        <li style="margin-left: {{ forloop.counter0|add:"1" }}0px;">
+          <a href="{% url 'tree_menu:item_detail' parent.name %}" class="d-block">
+            {{ parent.name }}
+          </a>
+        </li>
+      {% endfor %}
+  
+      {% if current_obj %}
+        <li style="margin-left: {{ parents|length|add:"1" }}0px;" class="fw-bold">
+          {{ current_obj.name }}
+        </li>
+      {% endif %}
+  
+      {% if childrens %}
+        {% for child in childrens %}
+          <li style="margin-left: {{ parents|length|add:"2" }}0px;">
+            <a href="{% url 'tree_menu:item_detail' child.name %}" class="d-block">
+              {{ child.name }}
+            </a>
+          </li>
+        {% endfor %}
+      {% endif %}
+    </ul>
+  </div>
+  

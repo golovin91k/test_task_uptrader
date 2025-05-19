@@ -6,14 +6,16 @@
 <div class="row min-vh-100">
     <!-- Навигация слева -->
     <nav class="col-md-3 bg-light p-3 border-end">
-        <h5 class="mb-3">Меню</h5>
-        {% draw_menu 'main_menu' %}
+        {% draw_menu 'main' active_menu_items.main %}
     </nav>
 
     <!-- Контент справа -->
     <main class="col-md-9 p-4">
-        <h1>Добро пожаловать!</h1>
+        <h1>Добро пожаловать!</h1> {{object.name}}
         <p>Здесь будет основной контент страницы.</p>
+        <nav class="col-md-3 bg-light p-3 border-end">
+            {% draw_menu 'nav' active_menu_items.nav %}
+        </nav>
     </main>
 </div>
 {% endblock %}
